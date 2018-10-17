@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author Tomas Brabec
  */
-public class Polygon implements ObjectRender {
+public class Polygon implements ObjectData {
 
     /**
      * Seznam bodu tvorici mnohouhelnik
@@ -53,7 +53,7 @@ public class Polygon implements ObjectRender {
     }
 
     /**
-     * Implementovana metoda rozhrani ObjectRender
+     * Implementovana metoda rozhrani ObjectData
      *
      * @return vraci seznam bodu
      */

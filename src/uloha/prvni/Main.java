@@ -14,7 +14,7 @@ import javax.swing.*;
  */
 public class Main {
     public static void main(String[] args) {
-        int width = 800, height = 600;
+        int width = 1024, height = 768;
 
         SwingUtilities.invokeLater(() -> {
             Window window = new Window(width, height, "PRGF1 - Úloha první");

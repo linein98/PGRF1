@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author Tomas Brabec
  */
-public interface ObjectRender {
+public interface ObjectData {
     /**
      * @return vraci seznam bodu
      */

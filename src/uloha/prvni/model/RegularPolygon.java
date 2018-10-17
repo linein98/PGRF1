@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author Tomas Brabec
  */
-public class RegularPolygon implements ObjectRender {
+public class RegularPolygon implements ObjectData {
 
     /**
      * Seznam bodu tvorici pravidelny mnohouhelnik
@@ -84,13 +84,11 @@ public class RegularPolygon implements ObjectRender {
         if (count < 3)
             count = 3;
 
-        if (count > 360)
-            count = 360;
         return count;
     }
 
     /**
-     * Implementovana metoda rozhrani ObjectRender
+     * Implementovana metoda rozhrani ObjectData
      *
      * @return vraci seznam bodu
      */

@@ -59,14 +59,14 @@ public class Window {
         lblSelected = new JLabel();
         lblSelected.setForeground(Color.BLACK);
         lblSelected.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 8));
-        lblSelected.setText(String.format("[1] %s, [2] %s, [3] %s, [C] %s",
+        lblSelected.setText(String.format("[1] %s, [2] %s, [3] %s, [A] %s, [C] %s",
                 ObjectType.Line.getName(), ObjectType.Polygon.getName(),
-                ObjectType.RegularPolygon.getName(), "Smazat vše"));
+                ObjectType.RegularPolygon.getName(), "Změna algoritmu", "Smazat vše"));
         infoPanel.add(lblSelected);
 
+        frame.setResizable(false);
         frame.pack();
         frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
         frame.setVisible(true);
         canvas.requestFocus();
     }

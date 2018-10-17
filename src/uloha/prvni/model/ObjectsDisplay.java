@@ -20,7 +20,11 @@ public class ObjectsDisplay {
     /**
      * List pro praci s objekty
      */
-    private List<ObjectRender> objects;
+    private List<ObjectData> objects;
+    /**
+     * Specifikovani algoritmu na vykreslovani
+     */
+    private Renderer renderer;
 
     /**
      * @param width  sirka platna
@@ -30,6 +34,7 @@ public class ObjectsDisplay {
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         objectName = ObjectType.Line;
         objects = new ArrayList<>();
+        renderer = new DDARenderer(image);
     }
 
     public BufferedImage getImage() {
@@ -48,6 +53,14 @@ public class ObjectsDisplay {
         return (Polygon) objects.get(objects.size() - 1);
     }
 
+    public Renderer getRenderer() {
+        return renderer;
+    }
+
+    public void setRenderer(Renderer renderer) {
+        this.renderer = renderer;
+    }
+
     /**
      * Zjisteni, jestli je uz nejaky polygon vytvoren
      *
@@ -61,56 +74,11 @@ public class ObjectsDisplay {
     }
 
     /**
-     * Vykresleni usecky pomoci dvou bodu
-     *
-     * @param start pocatecni bod
-     * @param end   koncovy bod
-     * @param color barva usecky
-     */
-    public void drawLine(Point start, Point end, int color) {
-        drawLine(start.x, start.y, end.x, end.y, color);
-    }
-
-    public void drawLine(int x1, int y1, int x2, int y2, int color) {
-        int dx = x2 - x1;
-        int dy = y2 - y1;
-        int steps;
-
-        if (Math.abs(dx) > Math.abs(dy))
-            steps = Math.abs(dx);
-        else
-            steps = Math.abs(dy);
-
-        float xin = dx / (float) steps;
-        float yin = dy / (float) steps;
-
-        float x = x1, y = y1;
-
-        for (int v = 0; v < steps; v++) {
-            drawPixel(Math.round(x), Math.round(y), color);
-            x = x + xin;
-            y = y + yin;
-        }
-    }
-
-    /**
-     * Vykresleni jednoho pixelu
-     *
-     * @param x     souradnice X
-     * @param y     souradnice Y
-     * @param color barva pixelu
-     */
-    private void drawPixel(int x, int y, int color) {
-        if ((x >= 0 && x < image.getWidth()) && (y >= 0 && y < image.getHeight()))
-            image.setRGB(x, y, color);
-    }
-
-    /**
      * Pridani objektu do listu
      *
-     * @param or objekt implementujici rozhrani ObjectRender
+     * @param or objekt implementujici rozhrani ObjectData
      */
-    public void addObject(ObjectRender or) {
+    public void addObject(ObjectData or) {
         objects.add(or);
     }
 
@@ -120,28 +88,28 @@ public class ObjectsDisplay {
     public void refresh() {
         Graphics g = image.getGraphics();
         g.setColor(Color.BLACK);
-        g.clearRect(0, 0, 800, 600);
+        g.clearRect(0, 0, image.getWidth(), image.getHeight());
         render();
     }
 
     /**
      * Vykresleni objektu ulozenych v listu
      */
-    public void render() {
+    private void render() {
         int color;
-        for (ObjectRender object : objects) {
+        for (ObjectData object : objects) {
             List<Point> points = object.getPoints();
             if (object instanceof Line) {
                 color = 0xFFFF00;
                 for (int i = 0; i < points.size() - 1; i++)
-                    drawLine(points.get(i), points.get(i + 1), color);
+                    renderer.drawLine(points.get(i), points.get(i + 1), color);
             } else if (object instanceof Polygon || object instanceof RegularPolygon) {
                 color = (object instanceof Polygon) ? 0x00FFFF : 0xFF00FF;
                 for (int i = 0; i < points.size() - 1; i++)
-                    drawLine(points.get(i), points.get(i + 1), color);
+                    renderer.drawLine(points.get(i), points.get(i + 1), color);
 
                 if (points.size() > 2)
-                    drawLine(points.get(0), points.get(points.size() - 1), color);
+                    renderer.drawLine(points.get(0), points.get(points.size() - 1), color);
             }
         }
     }
@@ -163,9 +131,9 @@ public class ObjectsDisplay {
         int color = 0xFF00FF;
 
         for (int i = 0; i < points.size() - 1; i++)
-            drawLine(points.get(i), points.get(i + 1), color);
+            renderer.drawLine(points.get(i), points.get(i + 1), color);
 
         if (points.size() > 2)
-            drawLine(points.get(0), points.get(points.size() - 1), color);
+            renderer.drawLine(points.get(0), points.get(points.size() - 1), color);
     }
 }

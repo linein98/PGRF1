@@ -1,6 +1,7 @@
 package uloha.prvni.model;
 
 import java.awt.*;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  *
  * @author Tomas Brabec
  */
-public class Line implements ObjectRender {
+public class Line implements ObjectData {
     private Point start;
     private Point end;
 
@@ -24,12 +25,14 @@ public class Line implements ObjectRender {
     }
 
     /**
-     * Implementovana metoda rozhrani ObjectRender
+     * Implementovana metoda rozhrani ObjectData
      *
      * @return vraci seznam bodu
      */
     @Override
     public List<Point> getPoints() {
-        return List.of(start, end);
+        //return List.of(start, end); JDK 10
+
+        return Arrays.asList(start, end);
     }
 }

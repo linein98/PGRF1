@@ -92,8 +92,6 @@ public class Controller {
                         }
                         objectsDisplay.refresh();
                         break;
-                    /*case RegularPolygon:
-                        break;*/
                 }
             }
 
@@ -126,18 +124,18 @@ public class Controller {
                     switch (click) {
                         case 1:
                             objectsDisplay.refresh();
-                            objectsDisplay.drawLine(p1, e.getPoint(), 0xFF0000);
+                            objectsDisplay.getRenderer().drawLine(p1, e.getPoint(), 0xFF0000);
                             objectsDisplay.render(RegularPolygon.calculatePoints(p1, e.getPoint(), 300));
                             break;
                         case 2:
                             objectsDisplay.refresh();
-                            objectsDisplay.drawLine(p1, p2, 0xFF0000);
+                            objectsDisplay.getRenderer().drawLine(p1, p2, 0xFF0000);
                             objectsDisplay.render(RegularPolygon.calculatePoints(p1, p2, 300));
                             click = 3;
                             break;
                         case 3:
                             objectsDisplay.refresh();
-                            objectsDisplay.drawLine(p1, p2, 0xFF0000);
+                            objectsDisplay.getRenderer().drawLine(p1, p2, 0xFF0000);
                             objectsDisplay.render(RegularPolygon.calculatePoints(p1, p2, RegularPolygon.getCount(e.getPoint(), p1, p2)));
                             break;
                     }
@@ -149,39 +147,23 @@ public class Controller {
                 switch (objectsDisplay.getObjectName()) {
                     case Line:
                         objectsDisplay.refresh();
-                        objectsDisplay.drawLine(point, e.getPoint(), 0xFF0000);
+                        objectsDisplay.getRenderer().drawLine(point, e.getPoint(), 0xFF0000);
                         break;
                     case Polygon:
                         objectsDisplay.refresh();
                         if (objectsDisplay.isPolygonLast()) {
                             Point point1 = objectsDisplay.getLastPolygon().getPoint(true);
                             Point point2 = objectsDisplay.getLastPolygon().getPoint(false);
-                            objectsDisplay.drawLine(point1, e.getPoint(), 0xFF0000);
-                            objectsDisplay.drawLine(point2, e.getPoint(), 0xFF0000);
+                            objectsDisplay.getRenderer().drawLine(point1, e.getPoint(), 0xFF0000);
+                            objectsDisplay.getRenderer().drawLine(point2, e.getPoint(), 0xFF0000);
                         } else {
-                            objectsDisplay.drawLine(point, e.getPoint(), 0xFF0000);
+                            objectsDisplay.getRenderer().drawLine(point, e.getPoint(), 0xFF0000);
                         }
                         break;
-                    /*case RegularPolygon:
-                        objectsDisplay.refresh();
-                        objectsDisplay.drawLine(point, e.getPoint(), 0xFF0000);
-                        objectsDisplay.render(RegularPolygon.calculatePoints(point, e.getPoint(), click));
-                        break;*/
                 }
                 window.getLblXY().setText("x: " + e.getX() + ", y: " + e.getY());
             }
         });
-
-        /*window.getCanvas().addMouseWheelListener(new MouseAdapter() {
-            @Override
-            public void mouseWheelMoved(MouseWheelEvent e) {
-                int i = e.getWheelRotation();
-                if(i < 0 && click > 3)
-                    click--;
-                else if(i > 0)
-                    click++;
-            }
-        });*/
 
         window.getCanvas().addKeyListener(new KeyAdapter() {
             @Override
@@ -203,6 +185,16 @@ public class Controller {
                     case 67:
                         objectsDisplay.delete();
                         window.getLblSelected().setText("Smazáno");
+                        break;
+                    case 65:
+                        if(objectsDisplay.getRenderer() instanceof XWLineRenderer) {
+                            objectsDisplay.setRenderer(new DDARenderer(objectsDisplay.getImage()));
+                            window.getLblSelected().setText("DDA");
+                        } else {
+                            objectsDisplay.setRenderer(new XWLineRenderer(objectsDisplay.getImage()));
+                            window.getLblSelected().setText("Antialiasing");
+                        }
+                        objectsDisplay.refresh();
                         break;
                 }
             }
