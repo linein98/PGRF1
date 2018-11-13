@@ -9,6 +9,7 @@ import javax.swing.*;
 /**
  * Inicializace jednotlivich komponent - View(Window), Model(ObjectsDisplay), Controller
  * https://www.youtube.com/watch?v=Mk3qkQROb_k
+ * https://github.com/linein98/PGRF1
  *
  * @author Tomas Brabec
  */
