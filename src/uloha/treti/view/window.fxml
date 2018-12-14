@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="uloha.treti.controller.Controller">
+    <children>
+        <HBox maxHeight="100.0" minHeight="120.0" minWidth="1024.0">
+            <children>
+                <VBox alignment="CENTER" minWidth="120.0">
+                    <children>
+                        <Button fx:id="btnReset" mnemonicParsing="false" onAction="#resetClick" prefHeight="34.0"
+                                prefWidth="120.0" text="Reset pohledu" textAlignment="CENTER">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </VBox.margin>
+                        </Button>
+                        <Button fx:id="btnResetModel" mnemonicParsing="false" onAction="#resetModelClick"
+                                prefHeight="34.0" prefWidth="120.0" text="Reset modelu" textAlignment="CENTER">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </VBox.margin>
+                        </Button>
+                    </children>
+                    <opaqueInsets>
+                        <Insets/>
+                    </opaqueInsets>
+                    <HBox.margin>
+                        <Insets left="10.0"/>
+                    </HBox.margin>
+                </VBox>
+                <VBox alignment="CENTER_LEFT">
+                    <children>
+                        <Label text="Nastavení projekce:">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </VBox.margin>
+                        </Label>
+                        <RadioButton fx:id="rbPersp" mnemonicParsing="false" onAction="#rbChange" selected="true"
+                                     text="Perspektivní">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </VBox.margin>
+                            <toggleGroup>
+                                <ToggleGroup fx:id="projekce"/>
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rbOrtho" mnemonicParsing="false" onAction="#rbChange" text="Ortogonální"
+                                     toggleGroup="$projekce">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </VBox.margin>
+                        </RadioButton>
+                    </children>
+                    <HBox.margin>
+                        <Insets left="10.0"/>
+                    </HBox.margin>
+                </VBox>
+                <VBox alignment="CENTER" prefWidth="100.0">
+                    <children>
+                        <Label text="Nastavení zobrazení objektů:" textAlignment="RIGHT" wrapText="true">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </VBox.margin>
+                        </Label>
+                    </children>
+                    <HBox.margin>
+                        <Insets left="100.0"/>
+                    </HBox.margin>
+                </VBox>
+                <VBox alignment="CENTER_LEFT">
+                    <children>
+                        <CheckBox fx:id="cbCube" mnemonicParsing="false" onAction="#cbClick" selected="true"
+                                  text="Krychle">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </VBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="cbAxis" mnemonicParsing="false" onAction="#cbClick" selected="true" text="Osy">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </VBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="cbParam" mnemonicParsing="false" onAction="#cbClick" selected="true"
+                                  text="Motýl">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </VBox.margin>
+                        </CheckBox>
+                    </children>
+                    <HBox.margin>
+                        <Insets left="10.0"/>
+                    </HBox.margin>
+                </VBox>
+                <VBox alignment="CENTER_LEFT">
+                    <children>
+                        <CheckBox fx:id="cbBazi" mnemonicParsing="false" onAction="#cbClick" selected="true"
+                                  text="Bézierova">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </VBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="cbCoon" mnemonicParsing="false" onAction="#cbClick" selected="true"
+                                  text="Coonsova">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </VBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="cbFerg" mnemonicParsing="false" onAction="#cbClick" selected="true"
+                                  text="Fergusonova">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </VBox.margin>
+                        </CheckBox>
+                    </children>
+                    <padding>
+                        <Insets left="10.0"/>
+                    </padding>
+                </VBox>
+            </children>
+        </HBox>
+        <StackPane minHeight="768.0" minWidth="1024.0" prefHeight="150.0" prefWidth="200.0">
+            <children>
+                <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="768.0" minWidth="1024.0"
+                      onKeyPressed="#onKeyPressed" onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed"
+                      prefHeight="600.0" prefWidth="800.0"/>
+            </children>
+        </StackPane>
+    </children>
+</VBox>
